@@ -1,104 +1,51 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'system-ui';
-}
-
-body {
-     font-family: sans-serif;
+body{
+     background-color: burlywood;
      font-size: 18px;
-      background-color: antiquewhite;
+     font-family: sans-serif;
 }
 
-.container {
-     max-width: 800px;
+.container{
+     max-width: 1200px;
      width: 100%;
      margin: 0 auto;
-     margin-top: 100px;
 }
 
-.container h1 {
-     text-align: center;
-     margin-bottom: 30px;
-}
-
-#form {
+#form{
+     width: 800px;
+     margin: 50px auto;
      display: flex;
      align-items: center;
-     justify-content: space-between;
-     margin-bottom: 30px;
+     flex-direction: column;
      gap: 20px;
 }
 
-#form input{
-     width: 90%;
+#form *{
+     width: 100%;
      padding: 15px;
-     font-size: 20px;
-     border-radius: 8px;
+     border-radius: 6px;
+     outline-color: rgb(32, 32, 218);
      border: none;
 }
 
-button {
-     border: none;
-     background-color: blue;
-     padding: 15px 20px;
-     border-radius: 8px;
-     color: white;
+#form button{
+     background: blue;
+     color: #fff;
      cursor: pointer;
-     font-size: 20px;
-     margin-bottom: 50px;
+     width: 100px;
 }
 
-.item {
-     background-color: white;
-     padding: 20px;
-     margin-bottom: 15px;
-     width: 300px;
-     height: 400px;
+#wrapper{
      display: flex;
+     justify-content: space-between;
      flex-wrap: wrap;
-     border: 1px solid #ababab;
-     border-radius: 12px;
 }
 
-.left{
-     background-color: white;
+.card{
+     background-color: #fff;
      padding: 20px;
-     margin-bottom: 15px;
-     width: 300px;
-     height: 400px;
-     display: flex;
-     flex-direction: column;
-     border: 1px solid #ababab;
-     border-radius: 12px;
 }
 
-
-.item .left, .right {
-     display: flex;
-     align-items: center;
-     gap: 15px;
-}
-
-.right button:first-child {
-     background-color: green;
-     color: white;
-     padding: 10px;
-     border: none;
-     font-size: 18px;
-     border-radius: 6px;
-     cursor: pointer;
-     margin-top: 200px;
-}
-
-.right button:last-child {
-     background-color: red;
-     color: white;
-     padding: 10px;
-     margin-top: 200px;
-     border: none;
-     font-size: 18px;
-     border-radius: 6px;
-     cursor: pointer;
+h1{
+     text-align: center;
+     margin-top: 50px;
 }
