@@ -7,39 +7,41 @@ const nationality = document.getElementById('nationality');
 const wrapper = document.getElementById('wrapper');
 
 function validate() {
-    if(name.value.length < 3){
-        alert('Name must be more than 3 character');
+    if (name.value.length < 3) {
+        alert('Name must be more than 3 characters');
         name.focus();
-        name.style.outlineColor = 'red';
+        name.classList.add('error');
         return false;
-
+    } else {
+        name.classList.remove('error');
     }
 
-    if(!age.value || age.value > 150 || age.value < 0){
-            alert('Age is not valid');
-            age.focus();
-            age.style.outlineColor = 'red';
-            return false;
+    if (!age.value || age.value > 150 || age.value < 0) {
+        alert('Age is not valid');
+        age.focus();
+        age.classList.add('error');
+        return false;
+    } else {
+        age.classList.remove('error');
     }
-
-
 
     return true;
 }
 
 function getUsers() {
-    const users = [];
-    if(localStorage.getItem('users')){
-        users = JSON.parse(localStorage.getItem('users'))
+    let users = [];
+    const Users = localStorage.getItem('users');
+    if (Users) {
+        users = JSON.parse(Users);
     }
     return users;
 }
 
-button && button.addEventListener('click', function(event){
+button && button.addEventListener('click', function (event) {
     event.preventDefault();
 
     const isValid = validate();
-    if(!isValid){
+    if (!isValid) {
         return;
     }
 
@@ -50,30 +52,38 @@ button && button.addEventListener('click', function(event){
         age: age.value,
         nationality: nationality.value,
         id: Date.now()
-    }
+    };
 
     users.push(user);
     localStorage.setItem('users', JSON.stringify(users));
-    form.reset();
+
+    name.value = '';
+    surname.value = '';
+    age.value = '';
+    nationality.value = '';
+
+    const card = createCard(user);
+    wrapper.innerHTML += card;
 });
 
 function createCard(user) {
     return `
-    <div class="card">
-    <h3>${user.name + " " + user.surname }</h3>
-    <p>${user.age}</p>
-    <p>${user.nationality}</p>
-
-    <button data-id = "${user.id}">edit</button>
-    <button data-id = "${user.id}">delete</button>
-</div>
+        <div class="card">
+            <h3>${user.name} ${user.surname}</h3>
+            <p>Age: ${user.age}</p>
+            <p>Nationality: ${user.nationality}</p>
+            <button class="edit" data-id="${user.id}">Edit</button>
+            <button class="delete" data-id="${user.id}">Delete</button>
+        </div>
     `;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    let users = getUsers();
-    users.length > 0 && users.forEach(element => {
-        let card = createCard(element)
-        wrapper.innerHTML += card; 
-    });
-})
+    const users = getUsers();
+    if (users.length > 0) {
+        users.forEach(element => {
+            const card = createCard(element);
+            wrapper.innerHTML += card;
+        });
+    }
+});
